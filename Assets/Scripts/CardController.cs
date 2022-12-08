@@ -1,6 +1,4 @@
-using System;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 public class CardController : MonoBehaviour
 {
@@ -8,21 +6,19 @@ public class CardController : MonoBehaviour
 
     [SerializeField] private SpriteRenderer frontSpriteRenderer;
 
-    [SerializeField] private float hoverRotationSpeed = 10f;
-    [SerializeField] private float hoverRotationRadius = 0.1f;
+    [SerializeField] private float wrongRotationSpeed = 20f;
+    [SerializeField] private float wrongRotationRadius = 0.1f;
 
     [SerializeField] private float flipSpeed = 5f;
-    private float _angle;
-
-    private CardState _cardState = CardState.Back;
-
-    private Vector3 _centre;
-
-    [SerializeField] private MeshRenderer cardMeshRenderer;
     
+    [SerializeField] private MeshRenderer cardMeshRenderer;
     [SerializeField] private Material materialIdle;
     [SerializeField] private Material materialWrong;
     [SerializeField] private Material materialMatch;
+    
+    private CardState _cardState = CardState.Back;
+    private float _wrongRotationAngle ;
+    private Vector3 _startPosition;
 
     public Sprite Sprite
     {
@@ -32,8 +28,7 @@ public class CardController : MonoBehaviour
 
     private void Start()
     {
-        _centre = transform.position;
-        _angle = Random.Range(-1f, 1f);
+        _startPosition = transform.position;
     }
 
     private void Update()
@@ -70,13 +65,13 @@ public class CardController : MonoBehaviour
 
                 break;
             case CardState.Wrong:
-                _angle += hoverRotationSpeed * Time.deltaTime;
+                _wrongRotationAngle += wrongRotationSpeed * Time.deltaTime;
 
-                var offset = new Vector3(Mathf.Sin(_angle), Mathf.Cos(_angle), 0) * hoverRotationRadius;
-                transform.position = _centre + offset;
+                var offset = new Vector3(Mathf.Sin(_wrongRotationAngle), Mathf.Cos(_wrongRotationAngle), 0) * wrongRotationRadius;
+                transform.position = _startPosition + offset;
                 break;
             case CardState.Match:
-                transform.localScale *= 1.02f;
+                transform.localScale *= 1.03f;
                 break;
             case CardState.Removed:
             default: break;
