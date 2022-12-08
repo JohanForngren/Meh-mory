@@ -53,17 +53,18 @@ public class GameController : MonoBehaviour
         }
     }
 
-    public void OnCardRevealed(CardController cardController)
+    public void OnCardClicked(CardController cardController)
     {
         if (_firstRevealedCard == null)
-        {
             _firstRevealedCard = cardController;
-        }
         else
-        {
             _secondRevealedCard = cardController;
+    }
+
+    public void OnCardRevealed()
+    {
+        if (_secondRevealedCard != null)
             StartCoroutine(CheckIfRevealedCardsMatch());
-        }
     }
 
     private IEnumerator CheckIfRevealedCardsMatch()
@@ -73,7 +74,7 @@ public class GameController : MonoBehaviour
             _score++;
             scoreLabel.text = "Score: " + _score;
 
-            yield return new WaitForSeconds(.1f);
+            yield return new WaitForSeconds(2f);
 
             _firstRevealedCard.Remove();
             _secondRevealedCard.Remove();
