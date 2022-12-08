@@ -8,8 +8,8 @@ public class GameController : MonoBehaviour
 {
     private const int GridRows = 4;
     private const int GridCols = 4;
-    private const float OffsetX = 2f;
-    private const float OffsetY = 2f;
+    private const float OffsetX = 1.9f;
+    private const float OffsetY = 1.9f;
 
     [SerializeField] private CardController firstCard;
 
