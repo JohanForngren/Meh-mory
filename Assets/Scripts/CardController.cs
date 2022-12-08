@@ -8,7 +8,7 @@ public class CardController : MonoBehaviour
 
     [SerializeField] private SpriteRenderer frontSpriteRenderer;
 
-    [SerializeField] private float hoverRotationSpeed = 3f;
+    [SerializeField] private float hoverRotationSpeed = 10f;
     [SerializeField] private float hoverRotationRadius = 0.1f;
 
     [SerializeField] private float flipSpeed = 5f;
@@ -17,6 +17,12 @@ public class CardController : MonoBehaviour
     private CardState _cardState = CardState.Back;
 
     private Vector3 _centre;
+
+    [SerializeField] private MeshRenderer cardMeshRenderer;
+    
+    [SerializeField] private Material materialIdle;
+    [SerializeField] private Material materialWrong;
+    [SerializeField] private Material materialMatch;
 
     public Sprite Sprite
     {
@@ -63,13 +69,17 @@ public class CardController : MonoBehaviour
                 }
 
                 break;
-            case CardState.Removing:
-                transform.localScale *= 0.92f;
-                if (transform.localScale.y < 0.1f)
-                    gameObject.SetActive(false);
+            case CardState.Wrong:
+                _angle += hoverRotationSpeed * Time.deltaTime;
+
+                var offset = new Vector3(Mathf.Sin(_angle), Mathf.Cos(_angle), 0) * hoverRotationRadius;
+                transform.position = _centre + offset;
                 break;
-            default:
-                throw new ArgumentOutOfRangeException();
+            case CardState.Match:
+                transform.localScale *= 1.02f;
+                break;
+            case CardState.Removed:
+            default: break;
         }
     }
 
@@ -82,22 +92,27 @@ public class CardController : MonoBehaviour
         }
     }
 
-    public void OnMouseOver()
+    public void WrongMatch()
     {
-        _angle += hoverRotationSpeed * Time.deltaTime;
-
-        var offset = new Vector3(Mathf.Sin(_angle), Mathf.Cos(_angle), 0) * hoverRotationRadius;
-        transform.position = _centre + offset;
+        cardMeshRenderer.material = materialWrong;
+        _cardState = CardState.Wrong;
     }
 
     public void Hide()
     {
+        cardMeshRenderer.material = materialIdle;
         _cardState = CardState.FlippingToBack;
     }
 
+    public void Match()
+    {
+        _cardState = CardState.Match;
+        cardMeshRenderer.material = materialMatch;
+    }
     public void Remove()
     {
-        _cardState = CardState.Removing;
+        _cardState = CardState.Removed;
+        gameObject.SetActive(false);
     }
 }
 
@@ -107,5 +122,7 @@ public enum CardState
     FlippingToFront,
     Front,
     FlippingToBack,
-    Removing
+    Wrong,
+    Match,
+    Removed
 }

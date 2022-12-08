@@ -71,6 +71,9 @@ public class GameController : MonoBehaviour
     {
         if (_firstRevealedCard.Sprite == _secondRevealedCard.Sprite)
         {
+            _firstRevealedCard.Match();
+            _secondRevealedCard.Match();
+            
             _score++;
             scoreLabel.text = "Score: " + _score;
 
@@ -81,6 +84,8 @@ public class GameController : MonoBehaviour
         }
         else
         {
+            _firstRevealedCard.WrongMatch();
+            _secondRevealedCard.WrongMatch();
             _score--;
             scoreLabel.text = "Score: " + _score;
 
