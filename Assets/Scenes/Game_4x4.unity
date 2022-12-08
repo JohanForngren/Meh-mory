@@ -278,9 +278,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameController: {fileID: 581236724}
   frontSpriteRenderer: {fileID: 1933911693}
-  hoverRotationSpeed: 3
+  hoverRotationSpeed: 10
   hoverRotationRadius: 0.1
   flipSpeed: 5
+  cardMeshRenderer: {fileID: 1981261019}
+  materialIdle: {fileID: 2100000, guid: 2ed1169f42c3fce4480ad2a3a346de3b, type: 2}
+  materialWrong: {fileID: 2100000, guid: ff241b5edff35064baf5a4eeaba27983, type: 2}
+  materialMatch: {fileID: 2100000, guid: d13ef44d1c37e7b47b491b8fa035e837, type: 2}
 --- !u!4 &682075062
 Transform:
   m_ObjectHideFlags: 0
@@ -1067,7 +1071,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: dbebd729fa613e24f8f80cd350ccea92, type: 2}
+  - {fileID: 2100000, guid: 2ed1169f42c3fce4480ad2a3a346de3b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
