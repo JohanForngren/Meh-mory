@@ -227,7 +227,7 @@ MonoBehaviour:
   firstCard: {fileID: 682075060}
   cardSprites:
   - {fileID: 3286163911610860551, guid: be90842347da0ec46b707634cafa6907, type: 3}
-  - {fileID: 3286163911610860551, guid: 0b584da0ae77e4e44a8b523d781fa58c, type: 3}
+  - {fileID: 3286163911610860551, guid: c18f3773f372a254e905b4be4eb6218c, type: 3}
   - {fileID: 3286163911610860551, guid: 2404bd0e6956a1842b2b3ec3ff6dfe5c, type: 3}
   - {fileID: 3286163911610860551, guid: ec29331eb04f187449d1bf743bf6e349, type: 3}
   - {fileID: 3286163911610860551, guid: 3e04fb7095fd042449c1c56794fbd3d6, type: 3}
