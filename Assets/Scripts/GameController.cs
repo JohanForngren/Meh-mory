@@ -75,20 +75,25 @@ public class GameController : MonoBehaviour
     {
         if (_firstRevealedCard.Sprite == _secondRevealedCard.Sprite)
         {
-            soundController.PlayMatchSound();
             _firstRevealedCard.Match();
             _secondRevealedCard.Match();
-
+            
             _score++;
             scoreLabel.text = "Score: " + _score;
-
-            yield return new WaitForSeconds(2f);
-
-            _firstRevealedCard.Remove();
-            _secondRevealedCard.Remove();
+            
             _cardsStillInPlay -= 2;
             if (_cardsStillInPlay < 1)
+            {
                 StartCoroutine(Victory());
+            }
+            else
+            {
+                soundController.PlayMatchSound();
+                yield return new WaitForSeconds(2f);
+            }
+            
+            _firstRevealedCard.Remove();
+            _secondRevealedCard.Remove();
         }
         else
         {
