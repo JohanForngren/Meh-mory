@@ -1,9 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
@@ -14,7 +14,7 @@ public class GameController : MonoBehaviour
 
     [SerializeField] private CardController firstCard;
     [SerializeField] private Sprite[] cardSprites;
-    [SerializeField] private TextMeshProUGUI scoreLabel;
+    [SerializeField] private Text scoreLabel;
     [SerializeField] private SoundController soundController;
 
     private int _cardsStillInPlay;
