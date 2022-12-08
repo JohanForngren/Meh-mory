@@ -158,7 +158,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -28.45}
+  m_AnchoredPosition: {x: 0, y: -28.450012}
   m_SizeDelta: {x: 800, y: 300}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &187397582
@@ -183,11 +183,11 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: ab69a2da44612f84e97615a8d025e976, type: 3}
-    m_FontSize: 40
+    m_FontSize: 50
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 1
-    m_MaxSize: 40
+    m_MaxSize: 50
     m_Alignment: 1
     m_AlignByGeometry: 0
     m_RichText: 0
@@ -314,7 +314,7 @@ MonoBehaviour:
   - {fileID: 3286163911610860551, guid: 010028798c18c3147ba7d621835c8a38, type: 3}
   - {fileID: 3286163911610860551, guid: 1281dfb6aff758847a08654b4ba54897, type: 3}
   - {fileID: 3286163911610860551, guid: 7d9ec71fef1f7df4eaf5e8422790a2be, type: 3}
-  scoreLabel: {fileID: 0}
+  scoreLabel: {fileID: 187397582}
   soundController: {fileID: 890831667}
 --- !u!4 &581236725
 Transform:
@@ -1051,7 +1051,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1626204030}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.07, y: 0.2, z: -0.21}
+  m_LocalPosition: {x: 0.07, y: 0.2, z: -0.04}
   m_LocalScale: {x: 1.5151515, y: 1.5151515, z: 1.5151515}
   m_ConstrainProportionsScale: 0
   m_Children: []
