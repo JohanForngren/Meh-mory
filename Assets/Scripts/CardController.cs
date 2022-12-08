@@ -8,17 +8,17 @@ public class CardController : MonoBehaviour
 
     [SerializeField] private float wrongRotationSpeed = 20f;
     [SerializeField] private float wrongRotationRadius = 0.1f;
+    [SerializeField] private float flipSpeed = 200f;
+    [SerializeField] private float matchTransformSpeed = 5f;
 
-    [SerializeField] private float flipSpeed = 5f;
-    
     [SerializeField] private MeshRenderer cardMeshRenderer;
     [SerializeField] private Material materialIdle;
     [SerializeField] private Material materialWrong;
     [SerializeField] private Material materialMatch;
-    
+
     private CardState _cardState = CardState.Back;
-    private float _wrongRotationAngle ;
     private Vector3 _startPosition;
+    private float _wrongRotationAngle;
 
     public Sprite Sprite
     {
@@ -38,7 +38,7 @@ public class CardController : MonoBehaviour
             case CardState.Back:
                 break;
             case CardState.FlippingToFront:
-                if (transform.eulerAngles.y + flipSpeed >= 180f)
+                if (transform.eulerAngles.y + flipSpeed * Time.deltaTime >= 180f)
                 {
                     _cardState = CardState.Front;
                     gameController.OnCardRevealed();
@@ -46,32 +46,33 @@ public class CardController : MonoBehaviour
                 }
                 else
                 {
-                    transform.Rotate(0, flipSpeed, 0);
+                    transform.Rotate(0, flipSpeed * Time.deltaTime, 0);
                 }
 
                 break;
             case CardState.Front:
                 break;
             case CardState.FlippingToBack:
-                if (transform.eulerAngles.y + flipSpeed >= 360)
+                if (transform.eulerAngles.y + flipSpeed * Time.deltaTime >= 360)
                 {
                     _cardState = CardState.Back;
                     transform.Rotate(0, 360 - transform.eulerAngles.y, 0);
                 }
                 else
                 {
-                    transform.Rotate(0, flipSpeed, 0);
+                    transform.Rotate(0, flipSpeed * Time.deltaTime, 0);
                 }
 
                 break;
             case CardState.Wrong:
                 _wrongRotationAngle += wrongRotationSpeed * Time.deltaTime;
 
-                var offset = new Vector3(Mathf.Sin(_wrongRotationAngle), Mathf.Cos(_wrongRotationAngle), 0) * wrongRotationRadius;
+                var offset = new Vector3(Mathf.Sin(_wrongRotationAngle), Mathf.Cos(_wrongRotationAngle), 0) *
+                             wrongRotationRadius;
                 transform.position = _startPosition + offset;
                 break;
             case CardState.Match:
-                transform.localScale *= 1.03f;
+                transform.localScale *= 1 + matchTransformSpeed * Time.deltaTime;
                 break;
             case CardState.Removed:
             default: break;
@@ -104,6 +105,7 @@ public class CardController : MonoBehaviour
         _cardState = CardState.Match;
         cardMeshRenderer.material = materialMatch;
     }
+
     public void Remove()
     {
         _cardState = CardState.Removed;

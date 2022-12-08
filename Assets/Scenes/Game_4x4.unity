@@ -203,7 +203,7 @@ GameObject:
   - component: {fileID: 581236724}
   m_Layer: 0
   m_Name: Game Controller
-  m_TagString: Untagged
+  m_TagString: GameController
   m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -220,8 +220,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6730a41c4f9b6eb488383d91a3a115c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridRows: 4
+  gridCols: 4
+  gridOffsetX: 1.9
+  gridOffsetY: 1.9
   firstCard: {fileID: 682075060}
-  sprites:
+  cardSprites:
   - {fileID: 3286163911610860551, guid: be90842347da0ec46b707634cafa6907, type: 3}
   - {fileID: 3286163911610860551, guid: 0b584da0ae77e4e44a8b523d781fa58c, type: 3}
   - {fileID: 3286163911610860551, guid: 2404bd0e6956a1842b2b3ec3ff6dfe5c, type: 3}
@@ -280,7 +284,8 @@ MonoBehaviour:
   frontSpriteRenderer: {fileID: 1933911693}
   wrongRotationSpeed: 20
   wrongRotationRadius: 0.1
-  flipSpeed: 5
+  flipSpeed: 200
+  matchTransformSpeed: 5
   cardMeshRenderer: {fileID: 1981261019}
   materialIdle: {fileID: 2100000, guid: 2ed1169f42c3fce4480ad2a3a346de3b, type: 2}
   materialWrong: {fileID: 2100000, guid: ff241b5edff35064baf5a4eeaba27983, type: 2}
@@ -811,7 +816,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1626204030}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.17, z: -0.21}
+  m_LocalPosition: {x: 0.07, y: 0.2, z: -0.21}
   m_LocalScale: {x: 1.5151515, y: 1.5151515, z: 1.5151515}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -945,8 +950,8 @@ Transform:
   m_GameObject: {fileID: 1933911691}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0.08}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.9, y: 0.9, z: 0.9}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 682075062}
   m_RootOrder: 2
