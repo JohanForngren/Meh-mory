@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
@@ -14,10 +15,11 @@ public class GameController : MonoBehaviour
     [SerializeField] private CardController firstCard;
     [SerializeField] private Sprite[] cardSprites;
     [SerializeField] private TextMeshProUGUI scoreLabel;
+    [SerializeField] private SoundController soundController;
 
+    private int _cardsStillInPlay;
     private CardController _firstRevealedCard;
     private int _numberOfFLippedCards;
-
     private int _score;
     private CardController _secondRevealedCard;
 
@@ -25,6 +27,7 @@ public class GameController : MonoBehaviour
 
     private void Start()
     {
+        _cardsStillInPlay = gridCols * gridRows;
         InstantiateAndPlaceCards();
     }
 
@@ -54,6 +57,7 @@ public class GameController : MonoBehaviour
 
     public void OnCardClicked(CardController cardController)
     {
+        soundController.PlayClickSound();
         if (_firstRevealedCard == null)
             _firstRevealedCard = cardController;
         else
@@ -71,6 +75,7 @@ public class GameController : MonoBehaviour
     {
         if (_firstRevealedCard.Sprite == _secondRevealedCard.Sprite)
         {
+            soundController.PlayMatchSound();
             _firstRevealedCard.Match();
             _secondRevealedCard.Match();
 
@@ -81,9 +86,13 @@ public class GameController : MonoBehaviour
 
             _firstRevealedCard.Remove();
             _secondRevealedCard.Remove();
+            _cardsStillInPlay -= 2;
+            if (_cardsStillInPlay < 1)
+                StartCoroutine(Victory());
         }
         else
         {
+            soundController.PlayWrongSound();
             _firstRevealedCard.WrongMatch();
             _secondRevealedCard.WrongMatch();
             _score--;
@@ -103,5 +112,13 @@ public class GameController : MonoBehaviour
     private static T[] CreateShuffledCardDeck<T>(T[] array)
     {
         return Helpers.KnuthShuffle(array.Concat(array).ToArray());
+    }
+
+    private IEnumerator Victory()
+    {
+        scoreLabel.text = "Victory! Score: " + _score;
+        soundController.PlayVictorySound();
+        yield return new WaitForSeconds(6.5f); // Length of audio clip 
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
